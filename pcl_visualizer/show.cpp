@@ -1,6 +1,7 @@
 /**
  * 点云可视化
  * @note pcd文件要和执行文件在相同文件夹
+ * @note 路径不能出现中文
  */
 
 #include <pcl/visualization/cloud_viewer.h>
