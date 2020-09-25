@@ -3,5 +3,5 @@ mkdir build
 cd build
 cmake ..
 make
-mv ../*.pcd ./
+cp ../*.pcd ./
 ./cloud_viewer

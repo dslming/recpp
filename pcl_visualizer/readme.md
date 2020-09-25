@@ -1,1 +1,9 @@
-可执行文件要和pcd或者ply文件放在相同路径。
+waring:
+```js
+Failed to find match for field 'rgba'.
+```
+
+run:
+```js
+sh build.sh
+```
