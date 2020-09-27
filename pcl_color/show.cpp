@@ -39,7 +39,8 @@ int main() {
     // PCL_VISUALIZER_LUT 	
     // PCL_VISUALIZER_LUT_RANGE 
 	viewer->setPointCloudRenderingProperties(pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 3, "sample cloud"); 
-    
+    viewer->addCoordinateSystem (1.0);
+    viewer->initCameraParameters ();
 
     //执行一个while循环，每次调用spinOnce都给视窗处理事件的时间，这样允许鼠标键盘等交互操作，此外还有一种spin的重载方法，它只需调用一次。
 	while (!viewer->wasStopped())  {
