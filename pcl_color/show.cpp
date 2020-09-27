@@ -20,7 +20,7 @@ int main() {
 	}
 
 	boost::shared_ptr<pcl::visualization::PCLVisualizer> viewer(new pcl::visualization::PCLVisualizer("3D Viewer"));  
-	pcl::visualization::PointCloudColorHandlerRGBField<pcl::PointXYZRGB> rgb(cloud); 
+	pcl::visualization::PointCloudColorHandlerRGB<pcl::PointXYZRGB> rgb(cloud); 
     
 	viewer->addPointCloud<pcl::PointXYZRGB>(cloud,rgb, "sample cloud");  
     viewer->setPointCloudRenderingProperties (pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 3, "sample cloud");
