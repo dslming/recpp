@@ -6,6 +6,12 @@ class Box
 {
    public:
       double height;   // 高度
+      double width;   // 高度
+
+   double getHeight(void){
+      // this 是实例的指针
+      return this->height;
+   };
 };
 
 int main( )
@@ -13,7 +19,7 @@ int main( )
    // 方法1,隐式创建,在栈中分配内存
    Box b1;
    b1.height = 5.0;
-   cout<< b1.height<<endl;
+   cout<< b1.getHeight()<<endl;
 
    // 方法2,显示创建
    Box b2 = Box();
