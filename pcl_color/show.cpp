@@ -26,7 +26,7 @@ int main() {
 	pcl::visualization::PointCloudColorHandlerRGBField<pcl::PointXYZRGB> rgb(cloud); 
     
     //这是最重要的一行，我们将点云添加到视窗对象中，并定义一个唯一的字符串作为ID号，利用此字符串保证在其他成员方法中也能标识引用该点云，多次调用addPointCloud()，可以实现多个点云的添加，每调用一次就创建一个新的ID号，如果想更新一个已经显示的点云，用户必须先调用removePointCloud()，并提供需要更新的点云的ID号。（注：PCL 的1.1及以上版本提供一个新的API，updatePointCloud()，通过该接口，不必手动调用removePointCloud()，就可实现点云的更新）。
-	viewer->addPointCloud<pcl::PointXYZRGB>(cloud, "sample cloud");  
+	viewer->addPointCloud<pcl::PointXYZRGB>(cloud,rgb, "sample cloud");  
     // 用于改变显示点云的尺寸。用户可以利用该方法控制点云在视窗中的显示方式。
     // PCL_VISUALIZER_POINT_SIZE 	
     // PCL_VISUALIZER_OPACITY 	
@@ -39,7 +39,7 @@ int main() {
     // PCL_VISUALIZER_LUT 	
     // PCL_VISUALIZER_LUT_RANGE 
 	viewer->setPointCloudRenderingProperties(pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 3, "sample cloud"); 
-
+    
 
     //执行一个while循环，每次调用spinOnce都给视窗处理事件的时间，这样允许鼠标键盘等交互操作，此外还有一种spin的重载方法，它只需调用一次。
 	while (!viewer->wasStopped())  {
