@@ -19,33 +19,17 @@ int main() {
 		return -1;
 	}
 
-    //创建视窗对象，并给标题栏定义一个名称"3D Viewer"，我们将它定义为boost::shared_ptr智能共享指针，这样可以保证该指针在整个程序全局使用，而不引起内存错误，通常情况下，用户不需要这样做。名称为“3D Viewer”
 	boost::shared_ptr<pcl::visualization::PCLVisualizer> viewer(new pcl::visualization::PCLVisualizer("3D Viewer"));  
-
-    //创建一个颜色处理对象PointCloudColorHandlerRGB，PCLVisualizer类利用这样的对象显示自定义颜色数据，在这个示例中，PointCloudColorHandlerRGB对象得到每个点云的RGB颜色字段
 	pcl::visualization::PointCloudColorHandlerRGBField<pcl::PointXYZRGB> rgb(cloud); 
     
-    //这是最重要的一行，我们将点云添加到视窗对象中，并定义一个唯一的字符串作为ID号，利用此字符串保证在其他成员方法中也能标识引用该点云，多次调用addPointCloud()，可以实现多个点云的添加，每调用一次就创建一个新的ID号，如果想更新一个已经显示的点云，用户必须先调用removePointCloud()，并提供需要更新的点云的ID号。（注：PCL 的1.1及以上版本提供一个新的API，updatePointCloud()，通过该接口，不必手动调用removePointCloud()，就可实现点云的更新）。
 	viewer->addPointCloud<pcl::PointXYZRGB>(cloud,rgb, "sample cloud");  
-    // 用于改变显示点云的尺寸。用户可以利用该方法控制点云在视窗中的显示方式。
-    // PCL_VISUALIZER_POINT_SIZE 	
-    // PCL_VISUALIZER_OPACITY 	
-    // PCL_VISUALIZER_LINE_WIDTH 	
-    // PCL_VISUALIZER_FONT_SIZE 	
-    // PCL_VISUALIZER_COLOR 	
-    // PCL_VISUALIZER_REPRESENTATION 	
-    // PCL_VISUALIZER_IMMEDIATE_RENDERING 	
-    // PCL_VISUALIZER_SHADING 	
-    // PCL_VISUALIZER_LUT 	
-    // PCL_VISUALIZER_LUT_RANGE 
-	viewer->setPointCloudRenderingProperties(pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 3, "sample cloud"); 
+    viewer->setPointCloudRenderingProperties (pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 3, "sample cloud");
     viewer->addCoordinateSystem (1.0);
     viewer->initCameraParameters ();
 
-    //执行一个while循环，每次调用spinOnce都给视窗处理事件的时间，这样允许鼠标键盘等交互操作，此外还有一种spin的重载方法，它只需调用一次。
 	while (!viewer->wasStopped())  {
-		viewer->spinOnce(100);
-		boost::this_thread::sleep(boost::posix_time::microseconds(100000));
+		// viewer->spinOnce(100);
+		// boost::this_thread::sleep(boost::posix_time::microseconds(100000));
 	}
 
 	return 0;
