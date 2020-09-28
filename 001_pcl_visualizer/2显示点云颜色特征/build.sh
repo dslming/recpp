@@ -7,6 +7,6 @@ cd build
 cmake ..
 # 编译
 make
-cp ../../data/Kinect2_RGB.pcd ./
+cp ../../../data/Kinect2_RGB.pcd ./
 # 运行文件
 ./cloud_viewer
