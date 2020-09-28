@@ -25,7 +25,7 @@ int main() {
 	pcl::visualization::PointCloudColorHandlerRGBField<pcl::PointXYZRGB> rgb(cloud);
 
     // 添加点云
-	viewer->addPointCloud<pcl::PointXYZRGB>(cloud, "sample cloud1");
+	viewer->addPointCloud<pcl::PointXYZRGB>(cloud, rgb, "sample cloud1");
 
     // 添加坐标轴
 	viewer->addCoordinateSystem (1.0);
