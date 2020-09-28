@@ -23,7 +23,7 @@ int main() {
 	// 设置背景颜色
 	viewer->setBackgroundColor (0, 0, 0);
 
-	// 创建一个颜色处理程序对象,指定添加到视窗中点云的PointCloudColorHandlerRGB着色处理对象
+	// 创建一个颜色处理程序对象,对点云数据统一着色处理
 	pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZ> single_color(cloud, 0,255,0);
 
     // 添加点云
