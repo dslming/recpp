@@ -7,6 +7,6 @@ cd build
 cmake ..
 # 编译
 make
-cp ../*.ply ./
+cp ../*.pcd ./
 # 运行文件
 ./cloud_viewer
