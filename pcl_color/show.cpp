@@ -22,16 +22,16 @@ int main() {
 	// 设置背景颜色
 	viewer->setBackgroundColor (0, 0, 0);
 	// 创建一个颜色处理程序对象,将从每个点获取RGB颜色字段，以供查看者在绘制它们时使用。
-	pcl::visualization::PointCloudColorHandlerRGBAField<pcl::PointXYZRGB> rgb(cloud);
+	pcl::visualization::PointCloudColorHandlerRGBField<pcl::PointXYZRGB> rgb(cloud);
 
     // 添加点云
-	viewer->addPointCloud<pcl::PointXYZRGB>(cloud, rgb, "sample cloud1");
+	viewer->addPointCloud<pcl::PointXYZRGB>(cloud, "sample cloud1");
 
     // 添加坐标轴
 	viewer->addCoordinateSystem (1.0);
 	
 	while (!viewer->wasStopped())  {
-		// viewer->spinOnce(100);
+		viewer->spinOnce(100);
 	}
 
 	return 0;
