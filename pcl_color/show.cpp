@@ -1,7 +1,6 @@
 #include <iostream>    //所需头文件
 #include <pcl/point_types.h>
 #include <pcl/io/pcd_io.h>
-#include <pcl/io/ply_io.h>
 #include <pcl/visualization/pcl_visualizer.h>    //点云查看窗口头文件
 #include <pcl/io/io.h>
 
@@ -13,7 +12,7 @@ int main() {
 	// RGB点云
 	PointCloud<PointXYZRGB>::Ptr cloud(new PointCloud<PointXYZRGB>);
   // 读取点云数据
-	if (io::loadPLYFile("SphereDivision.ply", *cloud) == -1){
+	if (io::loadPCDFile("Kinect2_RGB.pcd", *cloud) == -1){
 		cerr << "can't read file file.pcd" << endl;
 		return -1;
 	}
