@@ -1,5 +1,3 @@
-// 该方法(PointCloudColorHandlerRGBField)要求点云类型包含RGB三个颜色分量，即该方法是直接显示点云中各个点的RGB属性字段信息，而不是通过对点云着色显示不同颜色。
-
 #include <iostream>    //所需头文件
 #include <pcl/point_types.h>
 #include <pcl/io/pcd_io.h>
@@ -12,24 +10,29 @@ using namespace pcl;
 using namespace io;
 
 int main() {
-	PointCloud<PointXYZRGB>::Ptr cloud(new PointCloud<PointXYZRGB>);   //创建点云指针
-
-	if (io::loadPLYFile("SphereDivision.ply", *cloud) == -1){ 
+	// RGB点云
+	PointCloud<PointXYZRGB>::Ptr cloud(new PointCloud<PointXYZRGB>);
+  // 读取点云数据
+	if (io::loadPLYFile("SphereDivision.ply", *cloud) == -1){
 		cerr << "can't read file file.pcd" << endl;
 		return -1;
 	}
 
-	boost::shared_ptr<pcl::visualization::PCLVisualizer> viewer(new pcl::visualization::PCLVisualizer("3D Viewer"));  
-	pcl::visualization::PointCloudColorHandlerRGB<pcl::PointXYZRGB> rgb(cloud); 
-    
-	viewer->addPointCloud<pcl::PointXYZRGB>(cloud,rgb, "sample cloud");  
-    viewer->setPointCloudRenderingProperties (pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 3, "sample cloud");
-    viewer->addCoordinateSystem (1.0);
-    viewer->initCameraParameters ();
+	// 创建查看器对象
+  pcl::visualization::PCLVisualizer::Ptr viewer (new pcl::visualization::PCLVisualizer ("3D Viewer"));
+	// 设置背景颜色
+	viewer->setBackgroundColor (0, 0, 0);
+	// 创建一个颜色处理程序对象,将从每个点获取RGB颜色字段，以供查看者在绘制它们时使用。
+	pcl::visualization::PointCloudColorHandlerRGBAField<pcl::PointXYZRGB> rgb(cloud);
+  // 添加点云
+	viewer->addPointCloud<pcl::PointXYZRGB>(cloud, rgb, "sample cloud1");
+  // 添加坐标轴
+	viewer->addCoordinateSystem (1.0);
+	// 初始化相机
+  viewer->initCameraParameters ();
 
 	while (!viewer->wasStopped())  {
-		// viewer->spinOnce(100);
-		// boost::this_thread::sleep(boost::posix_time::microseconds(100000));
+		viewer->spinOnce(100);
 	}
 
 	return 0;
