@@ -33,8 +33,8 @@ int main() {
 	viewer->createViewPort(0.0, 0.0, 0.5, 1.0, v1);
 	viewer->setBackgroundColor(0, 0, 0, v1);
 	viewer->addText("Radius: 0.01", 10, 10, "v1 text", v1);
-	pcl::visualization::PointCloudColorHandlerRGBField<pcl::PointXYZRGB> rgb(source);
-	viewer->addPointCloud<pcl::PointXYZRGB>(source, rgb, "sample cloud1", v1);
+	pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZRGB> rgb(source1,255, 0, 0);
+	viewer->addPointCloud<pcl::PointXYZRGB>(source1, rgb, "sample cloud1", v1);
 
 	int v2(0);
 	viewer->createViewPort(0.5, 0.0, 1.0, 1.0, v2);
