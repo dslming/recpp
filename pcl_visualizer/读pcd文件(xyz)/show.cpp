@@ -19,7 +19,7 @@ main ()
     }
 
     pcl::visualization::CloudViewer viewer("Cloud Viewer");
-
+    viewer.setBackgroundColor (1.0, 0.5, 1.0);
     viewer.showCloud(cloud);
 
     while (!viewer.wasStopped ())
