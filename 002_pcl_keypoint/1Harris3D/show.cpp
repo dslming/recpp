@@ -22,7 +22,7 @@ int main( int argc, char** argv ){
 	pcl::PointCloud<PointType>::Ptr point_cloud_ptr( new pcl::PointCloud<PointType>);       
 	pcl::PointCloud<PointType> & point_cloud = *point_cloud_ptr;   
     pcl::io::loadPCDFile ("roorm.pcd", point_cloud);      
-    cout << "load pcd file : " << "rabbit.pcd" << endl;
+    cout << "load pcd file : " << "roorm.pcd" << endl;
     cout << "point_cloud has :" << point_cloud.points.size() << " n points." << endl;
 
 
@@ -37,11 +37,10 @@ int main( int argc, char** argv ){
 	 * 提取Harri关键点
 	 */
 	pcl::HarrisKeypoint3D<pcl::PointXYZ, pcl::PointXYZI, pcl::Normal> harris;
+	// harris.setNonMaxSupression( true );
+	harris.setRadius( 0.9);                                                                             
+	harris.setThreshold( 0.1 );   
 	harris.setInputCloud( point_cloud_ptr );                                                               
-	cout << "input successful" << endl;
-	harris.setNonMaxSupression( true );
-	harris.setRadius( 0.1 );                                                                             
-	harris.setThreshold( 0.1 );                                                                         
 	cout << "parameter set successful" << endl;
 
 	/*
