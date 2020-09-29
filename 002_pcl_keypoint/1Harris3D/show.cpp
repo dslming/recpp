@@ -6,6 +6,7 @@
 #include <cstdlib>
 #include <vector>
 using namespace std;
+
 // https://blog.csdn.net/zzh_AI/article/details/92973574
 
 /* 定义别名 */
@@ -26,7 +27,6 @@ int main( int argc, char** argv ){
     cout << "load pcd file : " << "roorm.pcd" << endl;
     cout << "point_cloud has :" << point_cloud.points.size() << " n points." << endl;
 
-
 	/*
 	 * 3D点云显示
 	 */
@@ -34,6 +34,7 @@ int main( int argc, char** argv ){
 	viewer->setBackgroundColor(0, 0, 0);                                                                  
 	viewer->addPointCloud(point_cloud_ptr, "base");                                                             
     viewer->setPointCloudRenderingProperties( pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 3, "base");
+
 	/*
 	 * 提取Harri关键点
 	 */
