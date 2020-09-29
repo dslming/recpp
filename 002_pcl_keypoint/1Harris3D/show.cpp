@@ -16,10 +16,11 @@ int main( int argc, char** argv ){
 	/*
 	 * 读取pcd文件
 	 */
+	string file_name = "rabbit.pcd";
 	pcl::PointCloud<PointType>::Ptr point_cloud_ptr( new pcl::PointCloud<PointType>);       
 	pcl::PointCloud<PointType> & point_cloud = *point_cloud_ptr;   
-    pcl::io::loadPCDFile ("roorm.pcd", point_cloud);      
-    cout << "load pcd file : " << "roorm.pcd" << endl;
+    pcl::io::loadPCDFile (file_name, point_cloud);      
+    cout << "load pcd file : " << file_name << endl;
     cout << "point_cloud has :" << point_cloud.points.size() << " n points." << endl;
 
 	/*
@@ -28,16 +29,16 @@ int main( int argc, char** argv ){
 	boost::shared_ptr<pcl::visualization::PCLVisualizer> viewer( new pcl::visualization::PCLVisualizer );  
 	viewer->setBackgroundColor(0, 0, 0);                                                                  
 	viewer->addPointCloud(point_cloud_ptr, "base");                                                             
-    viewer->setPointCloudRenderingProperties( pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 3, "base");
+    viewer->setPointCloudRenderingProperties( pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 1, "base");
 
 	/*
 	 * 提取Harri关键点
 	 */
 	pcl::HarrisKeypoint3D<pcl::PointXYZ, pcl::PointXYZI, pcl::Normal> harris;
     // 设置法向量估算的半径
-	harris.setRadius( 0.1);      
+	harris.setRadius( 0.5);      
     // 设置关键点估计的近邻搜索半径
-	harris.setRadiusSearch(0.1);
+	harris.setRadiusSearch(0.5);
 	harris.setInputCloud( point_cloud_ptr );                                                               
 	cout << "parameter set successful" << endl;
 
