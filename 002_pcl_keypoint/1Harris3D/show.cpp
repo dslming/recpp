@@ -39,7 +39,8 @@ int main( int argc, char** argv ){
 	pcl::HarrisKeypoint3D<pcl::PointXYZ, pcl::PointXYZI, pcl::Normal> harris;
 	// harris.setNonMaxSupression( true );
 	harris.setRadius( 0.9);                                                                             
-	harris.setThreshold( 0.1 );   
+	harris.setRadiusSearch(0.1);
+	// harris.setThreshold( 0.1 );   
 	harris.setInputCloud( point_cloud_ptr );                                                               
 	cout << "parameter set successful" << endl;
 
