@@ -49,13 +49,14 @@ int main( int argc, char** argv ){
 	pcl::PointCloud<pcl::PointXYZI>::Ptr cloud_out(new pcl::PointCloud<pcl::PointXYZI>());
     cloud_out->clear();
 	harris.compute(*cloud_out);
-	cout << "extraction : " << cloud_out->size() << "keypoints." << endl;
+    int key_size = cloud_out->size();
+	cout << "extraction : " << key_size << "keypoints." << endl;
 	cout << "cloud_out width:" << cloud_out->width << "." << endl;
 	cout << "cloud_out height:" << cloud_out->height << "." << endl;
 
 	// 可视化结果不支持XYZI格式点云，所有又要导回XYZ格式
     pcl::PointCloud<pcl::PointXYZ>::Ptr	cloud_harris( new pcl::PointCloud<pcl::PointXYZ>);  
-	for ( int i = 0; i < size; ++i ) {
+	for ( int i = 0; i < key_size; ++i ) {
         pcl::PointXYZ point;
 		point.x = cloud_out->at( i ).x;
 		point.y = cloud_out->at( i ).y;
