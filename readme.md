@@ -7,3 +7,5 @@
 
 [MVision/PCL_APP](https://github.com/Ewenwan/MVision/tree/464e9bf7f98576b489edfb75a704d47ea4b577b5/PCL_APP)
 [PCL_Learning](https://github.com/MrRen-sdhm/PCL_Learning/tree/227961fa28a6590a6993558562e0b13defca48a0)
+
+[PCL-Tutorials](https://github.com/MrCocoaCat/PCL-Tutorials/tree/6f04c9bb91651684eb0252722363f298c59a3a38)
