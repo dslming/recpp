@@ -29,22 +29,19 @@ int main( int argc, char** argv ){
 	/*
 	 * 3D点云显示
 	 */
-	boost::shared_ptr<pcl::visualization::PCLVisualizer> viewer( new pcl::visualization::PCLVisualizer );   /* 可视化对象指针 */
-	viewer->setBackgroundColor(0, 0, 0);                                                                  /* 背景颜色　白色 */
-	viewer->addPointCloud( point_cloud_ptr );                                                               /* 指针 */
+	boost::shared_ptr<pcl::visualization::PCLVisualizer> viewer( new pcl::visualization::PCLVisualizer );  
+	viewer->setBackgroundColor(0, 0, 0);                                                                  
+	viewer->addPointCloud( point_cloud_ptr );                                                             
 
 	/*
-	 * --------------------------------
-	 * -----Extract Harri keypoints-----
-	 * --------------------------------
 	 * 提取Harri关键点
 	 */
 	pcl::HarrisKeypoint3D<pcl::PointXYZ, pcl::PointXYZI, pcl::Normal> harris;
-	harris.setInputCloud( point_cloud_ptr );                                                                /* 设置输入点云 指针 */
+	harris.setInputCloud( point_cloud_ptr );                                                               
 	cout << "input successful" << endl;
 	harris.setNonMaxSupression( true );
-	harris.setRadius( 0.02f );                                                                              /* 　块体半径 */
-	harris.setThreshold( 0.01f );                                                                           /* 数量阈值 */
+	harris.setRadius( 0.2f );                                                                             
+	harris.setThreshold( 0.1f );                                                                         
 	cout << "parameter set successful" << endl;
 
 	/*
