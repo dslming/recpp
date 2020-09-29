@@ -43,48 +43,39 @@ int main( int argc, char** argv ){
 	harris.setInputCloud( point_cloud_ptr );                                                               
 	cout << "parameter set successful" << endl;
 
-	/*
-	 * 新建的点云必须初始化，清零，否则指针会越界
-	 * 注意Harris的输出点云必须是有强度(I)信息的 pcl::PointXYZI，因为评估值保存在I分量里
-	 */
+	// 创建新点云
 	pcl::PointCloud<pcl::PointXYZI>::Ptr cloud_out_ptr( new pcl::PointCloud<pcl::PointXYZI>);
-	pcl::PointCloud<pcl::PointXYZI> & cloud_out = *cloud_out_ptr;
-	cloud_out.height = 1;
-	cloud_out.width	= 100;
-	cloud_out.resize( cloud_out.height * cloud_out.width );
-	cloud_out.clear();
-	cout << "extracting... " << endl;
-
-	/* 计算特征点 */
-	harris.compute(cloud_out);
+	harris.compute(cloud_out_ptr);
+    int size = cloud_out.size();
+	cout << "extraction : " << size << " n keypoints." << endl;
 
 	/* 关键点 */
-	pcl::PointCloud<pcl::PointXYZ>::Ptr	cloud_harris_ptr( new pcl::PointCloud<pcl::PointXYZ>);  
-	pcl::PointCloud<pcl::PointXYZ> &	cloud_harris = *cloud_harris_ptr;                      
-	cloud_harris.height	= 1;
-	cloud_harris.width	= 100;
-	cloud_harris.resize( cloud_out.height * cloud_out.width );
-	cloud_harris.clear();                                                                           
-	int size = cloud_out.size();
-	cout << "extraction : " << size << " n keypoints." << endl;
-	pcl::PointXYZ point;
-	/* 可视化结果不支持XYZI格式点云，所有又要导回XYZ格式。。。。 */
-	for ( int i = 0; i < size; ++i ) {
-		point.x = cloud_out.at( i ).x;
-		point.y = cloud_out.at( i ).y;
-		point.z = cloud_out.at( i ).z;
-		cloud_harris.push_back( point );
-	}
+	// pcl::PointCloud<pcl::PointXYZ>::Ptr	cloud_harris_ptr( new pcl::PointCloud<pcl::PointXYZ>);  
+	// pcl::PointCloud<pcl::PointXYZ> &	cloud_harris = *cloud_harris_ptr;                      
+	// cloud_harris.height	= 1;
+	// cloud_harris.width	= 100;
+	// cloud_harris.resize( cloud_out.height * cloud_out.width );
+	// cloud_harris.clear();                                                                           
+	// int size = cloud_out.size();
+	// cout << "extraction : " << size << " n keypoints." << endl;
+	// pcl::PointXYZ point;
+	// /* 可视化结果不支持XYZI格式点云，所有又要导回XYZ格式。。。。 */
+	// for ( int i = 0; i < size; ++i ) {
+	// 	point.x = cloud_out.at( i ).x;
+	// 	point.y = cloud_out.at( i ).y;
+	// 	point.z = cloud_out.at( i ).z;
+	// 	cloud_harris.push_back( point );
+	// }
 
-	/*
-	 * -------------------------------------
-	 * -----Show keypoints in 3D viewer-----
-	 * -------------------------------------
-	 * 在3D图形窗口中显示关键点
-	 */
-	pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZ> harris_color_handler( cloud_harris_ptr, 0, 255, 0 );    /* 第一个参数类型为　指针 */
-	viewer->addPointCloud( cloud_harris_ptr, harris_color_handler, "harris" );                                              /* 第一个参数类型为　指针 */
-	viewer->setPointCloudRenderingProperties( pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 5, "harris" );
+	// /*
+	//  * -------------------------------------
+	//  * -----Show keypoints in 3D viewer-----
+	//  * -------------------------------------
+	//  * 在3D图形窗口中显示关键点
+	//  */
+	// pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZ> harris_color_handler( cloud_harris_ptr, 0, 255, 0 );    /* 第一个参数类型为　指针 */
+	// viewer->addPointCloud( cloud_harris_ptr, harris_color_handler, "harris" );                                              /* 第一个参数类型为　指针 */
+	// viewer->setPointCloudRenderingProperties( pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 5, "harris" );
 
 	/*
 	 * --------------------
