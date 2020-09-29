@@ -38,10 +38,8 @@ int main( int argc, char** argv ){
 	 * 提取Harri关键点
 	 */
 	pcl::HarrisKeypoint3D<pcl::PointXYZ, pcl::PointXYZI, pcl::Normal> harris;
-	// harris.setNonMaxSupression( true );
 	harris.setRadius( 0.9);                                                                             
 	harris.setRadiusSearch(0.1);
-	// harris.setThreshold( 0.1 );   
 	harris.setInputCloud( point_cloud_ptr );                                                               
 	cout << "parameter set successful" << endl;
 
@@ -61,10 +59,9 @@ int main( int argc, char** argv ){
 	viewer->addPointCloud( cloud_out, harris_color_handler, "harris" );                                             
 	viewer->setPointCloudRenderingProperties( pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 5, "harris" );
 
+    viewer.spin();
 	/*
-	 * --------------------
-	 * -----Main loop-----
-	 * --------------------
+     * Main loop
 	 */
 	while ( !viewer->wasStopped() )
 	{
