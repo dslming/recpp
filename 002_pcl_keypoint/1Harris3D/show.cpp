@@ -1,7 +1,6 @@
 #include <iostream>            
 #include <boost/thread/thread.hpp>
 #include <pcl/io/pcd_io.h>     
-#include <pcl/io/ply_io.h>      
 #include <pcl/visualization/pcl_visualizer.h>
 #include <pcl/keypoints/harris_3d.h>
 #include <cstdlib>
@@ -23,27 +22,32 @@ int main( int argc, char** argv ){
 	 * ------------------------------------------------------------------
 	 * 读取ply文件；如果没有指定文件，就创建样本点
 	 */
-	pcl::PointCloud<PointType>::Ptr point_cloud_ptr( new pcl::PointCloud<PointType>);       /* 点云对象指针 */
-	pcl::PointCloud<PointType> &	point_cloud = *point_cloud_ptr;                         /* 引用　上面点云的别名　常亮指针 */
-	/* 检查参数中是否有ply格式文件名，返回参数向量中的索引号 */
-	if ( argc >= 2 )                                                                        /* 第二个参数为ply文件名 */
-	{
-		pcl::io::loadPLYFile( argv[1], point_cloud );
-		cout << "load ply file : " << argv[1] << endl;
-		cout << "point_cloud has :" << point_cloud.points.size() << " n points." << endl;
-	}else  { /* 没有指定ply文件，生成点云，并填充它 */
-		cout << "\nNo *.ply file given => Genarating example point cloud.\n\n";
-		for ( float x = -0.5f; x <= 0.5f; x += 0.01f )
-		{
-			for ( float y = -0.5f; y <= 0.5f; y += 0.01f )
-			{
-				PointType point;  point.x = x;  point.y = y;  point.z = 2.0f - y;
-				point_cloud.points.push_back( point ); /* 设置点云中点的坐标 */
-			}
-		}
-		point_cloud.width	= (int) point_cloud.points.size();
-		point_cloud.height	= 1;
-	}
+	pcl::PointCloud<PointType>::Ptr point_cloud_ptr( new pcl::PointCloud<PointType>);       
+	pcl::PointCloud<PointType> & point_cloud = *point_cloud_ptr;   
+
+    pcl::io::loadPCDFile ("rabbit.pcd", point_cloud);      
+    cout << "load pcd file : " << "rabbit.pcd" << endl;
+    cout << "point_cloud has :" << point_cloud.points.size() << " n points." << endl;
+
+	// /* 检查参数中是否有ply格式文件名，返回参数向量中的索引号 */
+	// if ( argc >= 2 )                                                                        /* 第二个参数为ply文件名 */
+	// {
+	// 	pcl::io::loadPLYFile( argv[1], point_cloud );
+	// 	cout << "load ply file : " << argv[1] << endl;
+	// 	cout << "point_cloud has :" << point_cloud.points.size() << " n points." << endl;
+	// }else  { /* 没有指定ply文件，生成点云，并填充它 */
+	// 	cout << "\nNo *.ply file given => Genarating example point cloud.\n\n";
+	// 	for ( float x = -0.5f; x <= 0.5f; x += 0.01f )
+	// 	{
+	// 		for ( float y = -0.5f; y <= 0.5f; y += 0.01f )
+	// 		{
+	// 			PointType point;  point.x = x;  point.y = y;  point.z = 2.0f - y;
+	// 			point_cloud.points.push_back( point ); /* 设置点云中点的坐标 */
+	// 		}
+	// 	}
+	// 	point_cloud.width	= (int) point_cloud.points.size();
+	// 	point_cloud.height	= 1;
+	// }
 
 	/*
 	 * --------------------------------------------
@@ -81,7 +85,7 @@ int main( int argc, char** argv ){
 	cloud_out.resize( cloud_out.height * cloud_out.width );
 	cloud_out.clear();
 	cout << "extracting... " << endl;
-    
+
 	/* 计算特征点 */
 	harris.compute( cloud_out );
 	/* 关键点 */
