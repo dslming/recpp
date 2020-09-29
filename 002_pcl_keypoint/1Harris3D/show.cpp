@@ -46,9 +46,10 @@ int main( int argc, char** argv ){
 
 	// 创建新点云
 	pcl::PointCloud<pcl::PointXYZI>::Ptr cloud_out(new pcl::PointCloud<pcl::PointXYZI>());
+    cloud_out.clear();
 	harris.compute(*cloud_out);
     int size = cloud_out->size();
-	cout << "extraction : " << size << " n keypoints." << endl;
+	cout << "extraction : " << size << "keypoints." << endl;
 
 	/* 关键点 */
 	// pcl::PointCloud<pcl::PointXYZ>::Ptr	cloud_harris_ptr( new pcl::PointCloud<pcl::PointXYZ>);  
