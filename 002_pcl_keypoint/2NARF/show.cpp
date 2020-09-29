@@ -134,7 +134,7 @@ main(int argc,char**argv)
 	//PointCloudColorHandlerCustom<PointType>point_cloud_color_handler (point_cloud_ptr, 150, 150, 150);
 	//viewer.addPointCloud (point_cloud_ptr, point_cloud_color_handler, "original point cloud");
 	viewer.initCameraParameters();
-	setViewerPose(viewer,range_image.getTransformationToWorldSystem());
+	// setViewerPose(viewer,range_image.getTransformationToWorldSystem());
 	// 显示距离图像
 	pcl::visualization::RangeImageVisualizer range_image_widget("Range image");
 	range_image_widget.showRangeImage(range_image);
