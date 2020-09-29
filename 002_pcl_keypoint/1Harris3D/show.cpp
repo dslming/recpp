@@ -12,11 +12,6 @@ using namespace std;
 /* 定义别名 */
 typedef pcl::PointXYZ PointType;
 
-/*
- * --------------
- * -----Main-----
- * --------------
- */
 int main( int argc, char** argv ){
 	/*
 	 * 读取pcd文件
@@ -39,12 +34,16 @@ int main( int argc, char** argv ){
 	 * 提取Harri关键点
 	 */
 	pcl::HarrisKeypoint3D<pcl::PointXYZ, pcl::PointXYZI, pcl::Normal> harris;
-	harris.setRadius( 0.1);                                                                             
+    // 设置法向量估算的半径
+	harris.setRadius( 0.1);      
+    // 设置关键点估计的近邻搜索半径
 	harris.setRadiusSearch(0.1);
 	harris.setInputCloud( point_cloud_ptr );                                                               
 	cout << "parameter set successful" << endl;
 
-	// 创建新点云,保存关键点云
+	/**
+     * 创建新点云,保存关键点云
+     */
 	pcl::PointCloud<pcl::PointXYZI>::Ptr cloud_out(new pcl::PointCloud<pcl::PointXYZI>());
     cloud_out->clear();
 	harris.compute(*cloud_out);
@@ -60,7 +59,6 @@ int main( int argc, char** argv ){
 	viewer->addPointCloud( cloud_out, harris_color_handler, "harris" );                                             
 	viewer->setPointCloudRenderingProperties( pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 5, "harris" );
 
-    viewer.spin();
 	/*
      * Main loop
 	 */
