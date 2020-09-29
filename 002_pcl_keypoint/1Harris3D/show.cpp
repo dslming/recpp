@@ -40,42 +40,43 @@ int main( int argc, char** argv ){
 	harris.setInputCloud( point_cloud_ptr );                                                               
 	cout << "input successful" << endl;
 	harris.setNonMaxSupression( true );
-	harris.setRadius( 0.2f );                                                                             
-	harris.setThreshold( 0.1f );                                                                         
+	harris.setRadius( 0.9f );                                                                             
+	harris.setThreshold( 0.9f );                                                                         
 	cout << "parameter set successful" << endl;
 
 	/*
 	 * 新建的点云必须初始化，清零，否则指针会越界
 	 * 注意Harris的输出点云必须是有强度(I)信息的 pcl::PointXYZI，因为评估值保存在I分量里
 	 */
-	pcl::PointCloud<pcl::PointXYZI>::Ptr	cloud_out_ptr( new pcl::PointCloud<pcl::PointXYZI>);
-	pcl::PointCloud<pcl::PointXYZI> &	cloud_out = *cloud_out_ptr;
-	cloud_out.height	= 1;
-	cloud_out.width		= 100;
+	pcl::PointCloud<pcl::PointXYZI>::Ptr cloud_out_ptr( new pcl::PointCloud<pcl::PointXYZI>);
+	pcl::PointCloud<pcl::PointXYZI> & cloud_out = *cloud_out_ptr;
+	cloud_out.height = 1;
+	cloud_out.width	= 100;
 	cloud_out.resize( cloud_out.height * cloud_out.width );
 	cloud_out.clear();
 	cout << "extracting... " << endl;
 
 	/* 计算特征点 */
-	harris.compute( cloud_out );
+	harris.compute(cloud_out);
+
 	/* 关键点 */
-	pcl::PointCloud<pcl::PointXYZ>::Ptr	cloud_harris_ptr( new pcl::PointCloud<pcl::PointXYZ>);  /* 指针 */
-	pcl::PointCloud<pcl::PointXYZ> &	cloud_harris = *cloud_harris_ptr;                       /* 引用 */
+	pcl::PointCloud<pcl::PointXYZ>::Ptr	cloud_harris_ptr( new pcl::PointCloud<pcl::PointXYZ>);  
+	pcl::PointCloud<pcl::PointXYZ> &	cloud_harris = *cloud_harris_ptr;                      
 	cloud_harris.height	= 1;
 	cloud_harris.width	= 100;
 	cloud_harris.resize( cloud_out.height * cloud_out.width );
-	cloud_harris.clear();                                                                           /* 清空 */
+	cloud_harris.clear();                                                                           
 	int size = cloud_out.size();
 	cout << "extraction : " << size << " n keypoints." << endl;
 	pcl::PointXYZ point;
 	/* 可视化结果不支持XYZI格式点云，所有又要导回XYZ格式。。。。 */
-	for ( int i = 0; i < size; ++i )
-	{
+	for ( int i = 0; i < size; ++i ) {
 		point.x = cloud_out.at( i ).x;
 		point.y = cloud_out.at( i ).y;
 		point.z = cloud_out.at( i ).z;
 		cloud_harris.push_back( point );
 	}
+
 	/*
 	 * -------------------------------------
 	 * -----Show keypoints in 3D viewer-----
