@@ -38,7 +38,7 @@ int main( int argc, char** argv ){
 	 * 提取Harri关键点
 	 */
 	pcl::HarrisKeypoint3D<pcl::PointXYZ, pcl::PointXYZI, pcl::Normal> harris;
-	harris.setRadius( 0.9);                                                                             
+	harris.setRadius( 0.1);                                                                             
 	harris.setRadiusSearch(0.1);
 	harris.setInputCloud( point_cloud_ptr );                                                               
 	cout << "parameter set successful" << endl;
