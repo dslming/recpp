@@ -6,6 +6,7 @@
 #include <cstdlib>
 #include <vector>
 using namespace std;
+// https://blog.csdn.net/zzh_AI/article/details/92973574
 
 /* 定义别名 */
 typedef pcl::PointXYZ PointType;
@@ -44,7 +45,7 @@ int main( int argc, char** argv ){
 	harris.setInputCloud( point_cloud_ptr );                                                               
 	cout << "parameter set successful" << endl;
 
-	// 创建新点云
+	// 创建新点云,保存关键点云
 	pcl::PointCloud<pcl::PointXYZI>::Ptr cloud_out(new pcl::PointCloud<pcl::PointXYZI>());
     cloud_out->clear();
 	harris.compute(*cloud_out);
@@ -52,33 +53,22 @@ int main( int argc, char** argv ){
 	cout << "cloud_out width:" << cloud_out->width << "." << endl;
 	cout << "cloud_out height:" << cloud_out->height << "." << endl;
 
-	/* 关键点 */
-	// pcl::PointCloud<pcl::PointXYZ>::Ptr	cloud_harris_ptr( new pcl::PointCloud<pcl::PointXYZ>);  
-	// pcl::PointCloud<pcl::PointXYZ> &	cloud_harris = *cloud_harris_ptr;                      
-	// cloud_harris.height	= 1;
-	// cloud_harris.width	= 100;
-	// cloud_harris.resize( cloud_out.height * cloud_out.width );
-	// cloud_harris.clear();                                                                           
-	// int size = cloud_out.size();
-	// cout << "extraction : " << size << " n keypoints." << endl;
-	// pcl::PointXYZ point;
-	// /* 可视化结果不支持XYZI格式点云，所有又要导回XYZ格式。。。。 */
-	// for ( int i = 0; i < size; ++i ) {
-	// 	point.x = cloud_out.at( i ).x;
-	// 	point.y = cloud_out.at( i ).y;
-	// 	point.z = cloud_out.at( i ).z;
-	// 	cloud_harris.push_back( point );
-	// }
+	// 可视化结果不支持XYZI格式点云，所有又要导回XYZ格式
+    pcl::PointCloud<pcl::PointXYZ>::Ptr	cloud_harris( new pcl::PointCloud<pcl::PointXYZ>);  
+	for ( int i = 0; i < size; ++i ) {
+        pcl::PointXYZ point;
+		point.x = cloud_out->at( i ).x;
+		point.y = cloud_out->at( i ).y;
+		point.z = cloud_out->at( i ).z;
+		cloud_harris->push_back(point);
+	}
 
-	// /*
-	//  * -------------------------------------
-	//  * -----Show keypoints in 3D viewer-----
-	//  * -------------------------------------
-	//  * 在3D图形窗口中显示关键点
-	//  */
-	// pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZ> harris_color_handler( cloud_harris_ptr, 0, 255, 0 );    /* 第一个参数类型为　指针 */
-	// viewer->addPointCloud( cloud_harris_ptr, harris_color_handler, "harris" );                                              /* 第一个参数类型为　指针 */
-	// viewer->setPointCloudRenderingProperties( pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 5, "harris" );
+	/*
+	 * 在3D图形窗口中显示关键点
+	 */
+	pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZ> harris_color_handler( cloud_harris, 0, 255, 0 );   
+	viewer->addPointCloud( cloud_harris, harris_color_handler, "harris" );                                             
+	viewer->setPointCloudRenderingProperties( pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 5, "harris" );
 
 	/*
 	 * --------------------
