@@ -8,6 +8,6 @@ cmake ..
 # 编译
 make
 # 将 pcd 文件拷贝到build, pcd文件要与执行文件相同的路径
-cp ../../../data/rabbit.pcd ./
+cp ../../../data/roorm.pcd ./
 # 运行文件
 ./cloud_viewer
