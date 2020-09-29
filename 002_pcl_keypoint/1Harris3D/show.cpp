@@ -54,21 +54,11 @@ int main( int argc, char** argv ){
 	cout << "cloud_out width:" << cloud_out->width << "." << endl;
 	cout << "cloud_out height:" << cloud_out->height << "." << endl;
 
-	// 可视化结果不支持XYZI格式点云，所有又要导回XYZ格式
-    pcl::PointCloud<pcl::PointXYZ>::Ptr	cloud_harris( new pcl::PointCloud<pcl::PointXYZ>);  
-	for ( int i = 0; i < key_size; ++i ) {
-        pcl::PointXYZ point;
-		point.x = cloud_out->at( i ).x;
-		point.y = cloud_out->at( i ).y;
-		point.z = cloud_out->at( i ).z;
-		cloud_harris->push_back(point);
-	}
-
 	/*
 	 * 在3D图形窗口中显示关键点
 	 */
-	pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZ> harris_color_handler( cloud_harris, 0, 255, 0 );   
-	viewer->addPointCloud( cloud_harris, harris_color_handler, "harris" );                                             
+	pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZI> harris_color_handler( cloud_out, 0, 255, 0 );   
+	viewer->addPointCloud( cloud_out, harris_color_handler, "harris" );                                             
 	viewer->setPointCloudRenderingProperties( pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 5, "harris" );
 
 	/*
