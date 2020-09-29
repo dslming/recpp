@@ -21,7 +21,7 @@ int main( int argc, char** argv ){
 	 */
 	pcl::PointCloud<PointType>::Ptr point_cloud_ptr( new pcl::PointCloud<PointType>);       
 	pcl::PointCloud<PointType> & point_cloud = *point_cloud_ptr;   
-    pcl::io::loadPCDFile ("rabbit.pcd", point_cloud);      
+    pcl::io::loadPCDFile ("room.pcd", point_cloud);      
     cout << "load pcd file : " << "rabbit.pcd" << endl;
     cout << "point_cloud has :" << point_cloud.points.size() << " n points." << endl;
 
