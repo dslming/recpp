@@ -33,7 +33,7 @@ int main( int argc, char** argv ){
 	boost::shared_ptr<pcl::visualization::PCLVisualizer> viewer( new pcl::visualization::PCLVisualizer );  
 	viewer->setBackgroundColor(0, 0, 0);                                                                  
 	viewer->addPointCloud( point_cloud_ptr );                                                             
-
+    viewer->setPointCloudRenderingProperties( pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 3, "harris" );
 	/*
 	 * 提取Harri关键点
 	 */
