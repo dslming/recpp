@@ -23,7 +23,8 @@ int main( int argc, char** argv ) {
 	srand( time( NULL ) );          /* 随机数 */
 	time_t begin, end;
 	begin = clock();                /* 开始计时 */
-
+	boost::shared_ptr<pcl::visualization::PCLVisualizer> viewer( new pcl::visualization::PCLVisualizer );
+	viewer->setBackgroundColor(0, 0, 0); 
 
 	/**
 	 * 产生假的点云数据
@@ -42,18 +43,15 @@ int main( int argc, char** argv ) {
 	/*
 	 * 3D点云显示
 	 */
-	boost::shared_ptr<pcl::visualization::PCLVisualizer> viewer( new pcl::visualization::PCLVisualizer );
-	viewer->setBackgroundColor(0, 0, 0); 
 	int base_color[3] = {255,255,255};                                                                 
 	showPoint(cloud_ptr, viewer, base_color, 1, "base");
-	// viewer->addPointCloud(cloud_ptr, "base");                                                             
-    // viewer->setPointCloudRenderingProperties( pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 1, "base");
 
 	/**
 	/* keTree 
 	 */
 	pcl::KdTreeFLANN<pcl::PointXYZ> kdtree;
 	kdtree.setInputCloud(cloud_ptr);
+	
 	// 随机定义一个 需要搜寻的点
 	pcl::PointXYZ searchPoint;
 	searchPoint.x	= 1024.0f * rand() / (RAND_MAX + 1.0f);
