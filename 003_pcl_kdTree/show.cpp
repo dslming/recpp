@@ -47,7 +47,7 @@ int main( int argc, char** argv ) {
 
 	// 显示搜寻的参考点
 	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_searchPoint(new pcl::PointCloud<pcl::PointXYZ>());
-	cloud_searchPoint->push_back(searchPoint)
+	cloud_searchPoint->push_back(searchPoint);
 	pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZ> searchPointColor( cloud_searchPoint, 0, 0, 255 );  
 	viewer->addPointCloud(cloud_searchPoint, searchPointColor, "searchPoint");                                                             
     viewer->setPointCloudRenderingProperties( pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 4, "searchPoint");
