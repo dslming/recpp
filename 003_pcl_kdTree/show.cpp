@@ -42,10 +42,11 @@ int main( int argc, char** argv ) {
 	/*
 	 * 3D点云显示
 	 */
-	boost::shared_ptr<pcl::visualization::PCLVisualizer> viewer( new pcl::visualization::PCLVisualizer );  
+	boost::shared_ptr<pcl::visualization::PCLVisualizer> viewer( new pcl::visualization::PCLVisualizer );
 	viewer->setBackgroundColor(0, 0, 0);                                                                  
-	viewer->addPointCloud(cloud_ptr, "base");                                                             
-    viewer->setPointCloudRenderingProperties( pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 1, "base");
+	showPoint(cloud_ptr, viewer, {255,255,255}, 1, "base")
+	// viewer->addPointCloud(cloud_ptr, "base");                                                             
+    // viewer->setPointCloudRenderingProperties( pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 1, "base");
 
 	/**
 	/* keTree 
