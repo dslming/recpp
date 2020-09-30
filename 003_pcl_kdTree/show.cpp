@@ -44,6 +44,7 @@ int main( int argc, char** argv ) {
 	searchPoint.x	= 1024.0f * rand() / (RAND_MAX + 1.0f);
 	searchPoint.y	= 1024.0f * rand() / (RAND_MAX + 1.0f);
 	searchPoint.z	= 1024.0f * rand() / (RAND_MAX + 1.0f);
+	
 	// 显示搜寻的参考点
 	pcl::PointCloud<pcl::PointXYZI>::Ptr cloud_searchPoint(new pcl::PointCloud<pcl::PointXYZI>());
 	cloud_searchPoint->push_back(searchPoint)
