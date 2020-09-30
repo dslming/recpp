@@ -45,7 +45,7 @@ int main( int argc, char** argv ) {
 	boost::shared_ptr<pcl::visualization::PCLVisualizer> viewer( new pcl::visualization::PCLVisualizer );
 	viewer->setBackgroundColor(0, 0, 0); 
 	int base_color[3] = {255,255,255};                                                                 
-	showPoint(cloud_ptr, viewer, base_color, 1, "base")
+	showPoint(cloud_ptr, viewer, base_color, 1, "base");
 	// viewer->addPointCloud(cloud_ptr, "base");                                                             
     // viewer->setPointCloudRenderingProperties( pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 1, "base");
 
@@ -63,8 +63,8 @@ int main( int argc, char** argv ) {
 	// 显示搜寻的参考点
 	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_searchPoint(new pcl::PointCloud<pcl::PointXYZ>());
 	cloud_searchPoint->push_back(searchPoint);
-	int color[3] = {255,0,0};
-	showPoint(cloud_searchPoint, viewer, color, 6, "searchPoint");
+	int search_color[3] = {255,0,0};
+	showPoint(cloud_searchPoint, viewer, search_color, 6, "searchPoint");
 
 	// K 个最近点去搜索
 	int K = 10;
@@ -87,9 +87,8 @@ int main( int argc, char** argv ) {
 			cloud_out->push_back( point );
 		    // pointNKNSquaredDistance[i]
 		}
-		pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZ> ret_color( cloud_out, 0, 255, 0 );  
-		viewer->addPointCloud(cloud_out, ret_color, "ret");                                                             
-    	viewer->setPointCloudRenderingProperties( pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 4, "ret");
+		int ret_color[3] = {0,255,0};
+		showPoint(cloud_out, viewer, ret_color, 4, "ret");
 	}
 
 	/* -------------------------------------------------------------------------------------------- */
