@@ -5,7 +5,7 @@
 #include <iostream>
 #include <vector>
 #include <ctime>                        /* time */
-
+using namespace std;
 void showPoint(
 	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud, 
 	boost::shared_ptr<pcl::visualization::PCLVisualizer> view,
@@ -13,8 +13,8 @@ void showPoint(
 	int pointSize,
 	string cloudName 
 	) {
-	pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZ> searchPointColor( cloud_searchPoint, color[0], color[1],color[2]);  
-    viewer->addPointCloud(cloud_searchPoint, searchPointColor, cloudName);                                                             
+	pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZ> cloud_color( cloud, color[0], color[1],color[2]);  
+    viewer->addPointCloud(cloud, cloud_color, cloudName);                                                             
     viewer->setPointCloudRenderingProperties( pcl::visualization::PCL_VISUALIZER_POINT_SIZE, pointSize, cloudName);
 }
 
