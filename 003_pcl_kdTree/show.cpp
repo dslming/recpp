@@ -17,7 +17,7 @@ int main( int argc, char** argv ) {
 	 */
 	pcl::PointCloud<pcl::PointXYZ>::Ptr	cloud_ptr( new pcl::PointCloud<pcl::PointXYZ>);
 	pcl::PointCloud<pcl::PointXYZ> &	cloud = *cloud_ptr;
-	cloud.width	= 400000;       /* 40万数据点 */
+	cloud.width	= 4000;       /* 数据点 */
 	cloud.height	= 1;
 	cloud.points.resize( cloud.width * cloud.height );
 	for ( size_t i = 0; i < cloud.points.size(); ++i ){
@@ -44,6 +44,10 @@ int main( int argc, char** argv ) {
 	searchPoint.x	= 1024.0f * rand() / (RAND_MAX + 1.0f);
 	searchPoint.y	= 1024.0f * rand() / (RAND_MAX + 1.0f);
 	searchPoint.z	= 1024.0f * rand() / (RAND_MAX + 1.0f);
+	pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZ> ret_color( cloud_out, 0, 0, 255 );  
+	viewer->addPointCloud(cloud_out, ret_color, "ret");                                                             
+    viewer->setPointCloudRenderingProperties( pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 4, "ret");
+
 	// K 个最近点去搜索
 	int K = 10;
     // 最近临搜索得到的索引
@@ -64,9 +68,9 @@ int main( int argc, char** argv ) {
 			cloud_out->push_back( point );
 		    // pointNKNSquaredDistance[i]
 		}
-		pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZI> ret_color( cloud_out, 0, 255, 0 );  
+		pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZ> ret_color( cloud_out, 0, 255, 0 );  
 		viewer->addPointCloud(cloud_out, ret_color, "ret");                                                             
-    	viewer->setPointCloudRenderingProperties( pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 2, "ret");
+    	viewer->setPointCloudRenderingProperties( pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 4, "ret");
 	}
 
 	/* -------------------------------------------------------------------------------------------- */
