@@ -8,7 +8,7 @@
 using namespace std;
 void showPoint(
 	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud, 
-	boost::shared_ptr<pcl::visualization::PCLVisualizer> view,
+	boost::shared_ptr<pcl::visualization::PCLVisualizer> viewer,
 	int color[3],
 	int pointSize,
 	string cloudName 
@@ -63,7 +63,7 @@ int main( int argc, char** argv ) {
 	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_searchPoint(new pcl::PointCloud<pcl::PointXYZ>());
 	cloud_searchPoint->push_back(searchPoint);
 	int color[3] = {255,0,0};
-	showPoint(cloud_searchPoint, view, color, 6, "searchPoint");
+	showPoint(cloud_searchPoint, viewer, color, 6, "searchPoint");
 
 	// K 个最近点去搜索
 	int K = 10;
