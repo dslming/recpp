@@ -43,8 +43,9 @@ int main( int argc, char** argv ) {
 	 * 3D点云显示
 	 */
 	boost::shared_ptr<pcl::visualization::PCLVisualizer> viewer( new pcl::visualization::PCLVisualizer );
-	viewer->setBackgroundColor(0, 0, 0);                                                                  
-	showPoint(cloud_ptr, viewer, {255,255,255}, 1, "base")
+	viewer->setBackgroundColor(0, 0, 0); 
+	int base_color[3] = {255,255,255};                                                                 
+	showPoint(cloud_ptr, viewer, base_color, 1, "base")
 	// viewer->addPointCloud(cloud_ptr, "base");                                                             
     // viewer->setPointCloudRenderingProperties( pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 1, "base");
 
