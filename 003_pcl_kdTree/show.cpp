@@ -63,7 +63,7 @@ int main( int argc, char** argv ) {
 			    << " " << searchPoint.z
 			     << ") with K=" << K << std::endl;
 	// 显示搜索结果
-	pcl::PointCloud<pcl::PointXYZI>::Ptr cloud_out(new pcl::PointCloud<pcl::PointXYZI>());
+	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_out(new pcl::PointCloud<pcl::PointXYZ>());
 	if ( kdtree.nearestKSearch( searchPoint, K, pointIdxNKNSearch, pointNKNSquaredDistance ) > 0 ){
 		for ( size_t i = 0; i < pointIdxNKNSearch.size(); ++i ) {
 			pcl::PointXYZ point;
