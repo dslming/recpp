@@ -1,5 +1,6 @@
 #include <pcl/point_cloud.h>
 #include <pcl/kdtree/kdtree_flann.h>
+#include <pcl/visualization/pcl_visualizer.h>
 
 #include <iostream>
 #include <vector>
@@ -7,23 +8,32 @@
 
 int main( int argc, char** argv ) {
 	srand( time( NULL ) );          /* 随机数 */
-
 	time_t begin, end;
 	begin = clock();                /* 开始计时 */
-	/* 点云对象指针 */
+
+
+	/**
+	 * 产生假的点云数据
+	 */
 	pcl::PointCloud<pcl::PointXYZ>::Ptr	cloud_ptr( new pcl::PointCloud<pcl::PointXYZ>);
 	pcl::PointCloud<pcl::PointXYZ> &	cloud = *cloud_ptr;
-
-	/* 产生假的点云数据 */
 	cloud.width	= 400000;       /* 40万数据点 */
 	cloud.height	= 1;
 	cloud.points.resize( cloud.width * cloud.height );
-
 	for ( size_t i = 0; i < cloud.points.size(); ++i ){
 		cloud.points[i].x	= 1024.0f * rand() / (RAND_MAX + 1.0f);
 		cloud.points[i].y	= 1024.0f * rand() / (RAND_MAX + 1.0f);
 		cloud.points[i].z	= 1024.0f * rand() / (RAND_MAX + 1.0f);
 	}
+
+	/*
+	 * 3D点云显示
+	 */
+	boost::shared_ptr<pcl::visualization::PCLVisualizer> viewer( new pcl::visualization::PCLVisualizer );  
+	viewer->setBackgroundColor(0, 0, 0);                                                                  
+	viewer->addPointCloud(cloud_ptr, "base");                                                             
+    viewer->setPointCloudRenderingProperties( pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 1, "base");
+
 	/* kdtree对象 */
 	pcl::KdTreeFLANN<pcl::PointXYZ> kdtree;
 	/* 输入点云 */
