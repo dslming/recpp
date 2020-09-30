@@ -54,7 +54,13 @@ int main( int argc, char** argv ) {
 			    << " " << searchPoint.y
 			    << " " << searchPoint.z
 			     << ") with K=" << K << std::endl;
-	pcl::PointCloud<pcl::PointXYZ>::Ptr	cloud_out( new pcl::PointCloud<pcl::PointXYZ>);
+	// 参考点
+	pcl::PointCloud<pcl::PointXYZ>::Ptr	cloud_searchPoint( new pcl::PointCloud<pcl::PointXYZ>);
+	cloud_ref->push_back(searchPoint)
+	pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZI> ret_color( cloud_out, 0, 0, 255 );  
+	viewer->addPointCloud(cloud_out, ret_color, "searchPoint");                                                             
+    viewer->setPointCloudRenderingProperties( pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 2, "searchPoint");
+
 	if ( kdtree.nearestKSearch( searchPoint, K, pointIdxNKNSearch, pointNKNSquaredDistance ) > 0 ){
 		for ( size_t i = 0; i < pointIdxNKNSearch.size(); ++i ) {
 			pcl::PointXYZ point;
