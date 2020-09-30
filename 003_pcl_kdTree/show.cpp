@@ -110,5 +110,11 @@ int main( int argc, char** argv ) {
 
 	std::cout << "time: " << Times << "s" << std::endl;
 
+
+	while ( !viewer->wasStopped() )
+	{
+		viewer->spinOnce();
+		pcl_sleep( 0.1 );
+	}
 	return(0);
 }
