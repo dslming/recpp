@@ -45,8 +45,9 @@ int main( int argc, char** argv ) {
 	searchPoint.y	= 1024.0f * rand() / (RAND_MAX + 1.0f);
 	searchPoint.z	= 1024.0f * rand() / (RAND_MAX + 1.0f);
 	// 显示搜寻的参考点
-	pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZ> cloud_searchPoint( cloud_out, 0, 0, 255 );  
+	pcl::PointCloud<pcl::PointXYZI>::Ptr cloud_searchPoint(new pcl::PointCloud<pcl::PointXYZI>());
 	cloud_searchPoint->push_back(searchPoint)
+	pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZ> cloud_searchPoint( cloud_searchPoint, 0, 0, 255 );  
 	viewer->addPointCloud(cloud_out, ret_color, "searchPoint");                                                             
     viewer->setPointCloudRenderingProperties( pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 4, "searchPoint");
 
@@ -60,6 +61,8 @@ int main( int argc, char** argv ) {
 			    << " " << searchPoint.y
 			    << " " << searchPoint.z
 			     << ") with K=" << K << std::endl;
+	// 显示搜索结果
+	pcl::PointCloud<pcl::PointXYZI>::Ptr cloud_out(new pcl::PointCloud<pcl::PointXYZI>());
 	if ( kdtree.nearestKSearch( searchPoint, K, pointIdxNKNSearch, pointNKNSquaredDistance ) > 0 ){
 		for ( size_t i = 0; i < pointIdxNKNSearch.size(); ++i ) {
 			pcl::PointXYZ point;
