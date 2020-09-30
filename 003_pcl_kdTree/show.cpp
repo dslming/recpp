@@ -49,7 +49,7 @@ int main( int argc, char** argv ) {
 	pcl::PointCloud<pcl::PointXYZI>::Ptr cloud_searchPoint(new pcl::PointCloud<pcl::PointXYZI>());
 	cloud_searchPoint->push_back(searchPoint)
 	pcl::visualization::PointCloudColorHandlerCustom<pcl::PointXYZ> cloud_searchPoint( cloud_searchPoint, 0, 0, 255 );  
-	viewer->addPointCloud(cloud_out, cloud_searchPoint, "searchPoint");                                                             
+	viewer->addPointCloud(cloud_searchPoint, cloud_searchPoint, "searchPoint");                                                             
     viewer->setPointCloudRenderingProperties( pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 4, "searchPoint");
 
 	// K 个最近点去搜索
