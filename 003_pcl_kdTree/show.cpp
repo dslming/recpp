@@ -61,7 +61,8 @@ int main( int argc, char** argv ) {
 	// 显示搜寻的参考点
 	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_searchPoint(new pcl::PointCloud<pcl::PointXYZ>());
 	cloud_searchPoint->push_back(searchPoint);
-	showPoint(cloud_searchPoint, view, [255,0,0], 6, "searchPoint")
+	int color[3] = [255,0,0];
+	showPoint(cloud_searchPoint, view, color, 6, "searchPoint")
 
 	// K 个最近点去搜索
 	int K = 10;
